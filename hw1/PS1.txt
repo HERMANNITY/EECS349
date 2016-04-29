@@ -1,0 +1,61 @@
+1. Which attributes appear to have outliers? (Do not worry too much about being precise here. The point is for you to inspect the data and interpret what you see.)
+
+volatile acidity, free sulfur dioxide, total sulfur dioxide
+
+2. What is the accuracy - the percentage of correctly classified instances - achieved by ZeroR when you run it on the training set? Explain this number. How is the accuracy of ZeroR a helpful baseline for interpreting the performance of other classifiers?
+
+62.381%. ZeroR always predict the majority of the classification, and the majority takes 62.381% of the whole dataset. The accuracy of ZeroR should be the least accuracy of a useful predictor. All the predictors whose accuracy is lower than the accuracy of this should be useless.
+
+3. Using a decision tree Weka learned over the training set, what is the most informative single feature for this task, and what is its influence on wine quality?
+
+Alcohol. Wines with higher alcohol have better quality.
+
+4. What is 10-fold cross-validation? What is the main reason for the difference between the percentage of Correctly Classified Instances when you measured accuracy on the training set itself, versus when you ran 10-fold cross-validation over the training set? Why is cross-validation important?
+
+i) 10-fold cross-validation is dividing the whole dataset into 10 parts randomly, and at each time, select one part as testing set, and other 9 is training set, repeat until all the part was selected.
+ii) The testing set has the information that the training set(given by cross-validation) does not have, so the accuracy would be lower when measuring accuracy on the testing set.
+iii) We need cross-validation to avoid overfitting by getting rid of the information of noise.
+
+5. What is the "command-line" for the model you are submitting? For example, "J48 -C 0.25 -M 2". What is the reported accuracy for your model using 10-fold cross-validation?
+
+RandomForest -I 100 -K 0 -S 1
+90.7937%
+
+6. In a few sentences, describe how you chose the model you are submitting. Be sure to mention your validation strategy and whether you tried varying any of the model parameters.
+
+We are learning decision trees, so I chose a model relevant to trees. The accuracy of RandomForest is highest in 10 cross-validation, and that is another reason I chose this. I tried to adjust ‘I’ and ‘K’ but I found that the default setting is the best I can get.
+
+7. A Wired article from several years ago on the 'Peta Age' suggests that increasingly huge data sets, coupled with machine learning techniques, makes model building obsolete. In particular it says: This is a world where massive amounts of data and applied mathe­matics replace every other tool that might be brought to bear. Out with every theory of human behavior, from linguistics to sociology. Forget taxonomy, ontology, and psychology… In a short paragraph (about four sentences), state whether you agree with this statement, and why or why not.
+
+I disagree.
+I think Big Data and ML are just a supplementary tool for the traditional way of dealing with things, at least in recent years. It is because the tools we have are far less powerful to replace other tools. What is more, obtaining good data requires a bunch of domain knowledge. Lastly, better domain knowledge would help people to find better ML tools in practice.
+
+8. Briefly explain what strategy you used to obtain the Classifiers A and B that performed well on one of the car or wine data sets, and not the other.
+
+Set A as DecisionStump, B as SimpleCart. Therefore wine_acc(A) + car_acc(B) – wine_acc(B) – car_acc(A) = 80.8466％ + 96.7227％ - 83.9153％ - 70.5024％ = 23.1516%
+When choosing A, I found that car task has four outputs, and there is not a feature that could be a obvious major information contributor to the output, therefore I choose a one rule classifier as A which relies on the major information contributor, and it would make the car task classified worse than A.
+For B, it is easier to select. Car task has less features and its input space is discrete and has less value, in other words, car dataset is simpler, so for most classifier the car task would outperform wine task.
+
+9. What is the key difference about the output space for the car task, as compared to the wine task?
+
+There is four outputs in the space for the car task while there is only two in wine task.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
