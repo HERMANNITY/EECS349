@@ -188,11 +188,11 @@ def split_on_nominal(data_set, attribute):
     ========================================================================================================
     '''
     ans = {}
-    for entry in data_set:
-        if ans.has_key(entry[attribute]):
-            ans[entry[attribute]].append(entry)
+    for x in data_set:
+        if ans.has_key(x[attribute]):
+            ans[x[attribute]].append(x)
         else:
-            ans[entry[attribute]] = [entry]
+            ans[x[attribute]] = [x]
     return ans
 # ======== Test case =============================
 # data_set, attr = [[0, 4], [1, 3], [1, 2], [0, 0], [0, 0], [0, 4], [1, 4], [0, 2], [1, 2], [0, 1]], 1
