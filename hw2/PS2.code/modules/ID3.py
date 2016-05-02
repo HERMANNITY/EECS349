@@ -211,8 +211,15 @@ def split_on_numerical(data_set, attribute, splitting_value):
     Output: Tuple of two lists as described above
     ========================================================================================================
     '''
-    # Your code here
-    pass
+    less = []
+    greater = []
+    for x in data_set:
+        if x[attribute] < splitting_value:
+            less.append(x)
+        else:
+            greater.append(x)
+    return (less, greater)
+
 # ======== Test case =============================
 # d_set,a,sval = [[1, 0.25], [1, 0.89], [0, 0.93], [0, 0.48], [1, 0.19], [1, 0.49], [0, 0.6], [0, 0.6], [1, 0.34], [1, 0.19]],1,0.48
 # split_on_numerical(d_set,a,sval) == ([[1, 0.25], [1, 0.19], [1, 0.34], [1, 0.19]],[[1, 0.89], [0, 0.93], [0, 0.48], [1, 0.49], [0, 0.6], [0, 0.6]])
