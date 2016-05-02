@@ -1,6 +1,7 @@
 import math
 from node import Node
 import sys
+import copy
 
 def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     '''
@@ -142,8 +143,20 @@ def gain_ratio_nominal(data_set, attribute):
     Output: Returns gain_ratio. See https://en.wikipedia.org/wiki/Information_gain_ratio
     ========================================================================================================
     '''
-    # Your code here
-    pass
+    splitnom = split_on_nominal(data_set, attribute)
+    numEntries = len(data_set)
+    dataEntropy = entropy(data_set)
+    IntrVal = 0
+    subsetEntropy = 0
+    for splitval in splitnom.keys():
+        prob = float(len(splitnom[splitval])) / numEntries
+        IntrVal += -prob * math.log(prob, 2)
+        subsetEntropy += entropy(splitnom[splitval]) * prob
+    InfoGain = dataEntropy - subsetEntropy
+    if InfoGain == 0:
+        return 0
+    else:
+        return InfoGain / IntrVal
 # ======== Test case =============================
 # data_set, attr = [[1, 2], [1, 0], [1, 0], [0, 2], [0, 2], [0, 0], [1, 3], [0, 4], [0, 3], [1, 1]], 1
 # gain_ratio_nominal(data_set,attr) == 0.11470666361703151
@@ -167,8 +180,23 @@ def gain_ratio_numeric(data_set, attribute, steps):
     Output: This function returns the gain ratio and threshold value
     ========================================================================================================
     '''
-    # Your code here
-    pass
+    pool = {}
+    for i in range(0, len(data_set)):
+        if i % steps == 0:
+            splitnum = split_on_numerical(data_set, attribute, data_set[i][attribute])
+            if splitnum[0] == [] or splitnum[1] == []:
+                gnratio = 0
+            else:
+                templeft = copy.deepcopy(splitnum[0])
+                tempright = copy.deepcopy(splitnum[1])
+                for entry in templeft:
+                    entry[attribute] = 0
+                for entry in tempright:
+                    entry[attribute] = 1
+                new_data_set = templeft + tempright
+                gnratio = gain_ratio_nominal(new_data_set, attribute)
+            pool[gnratio] = data_set[i][attribute]          #may have bug
+    return (max(pool.keys()), pool[max(pool.keys())])
 # ======== Test case =============================
 # data_set,attr,step = [[0,0.05], [1,0.17], [1,0.64], [0,0.38], [0,0.19], [1,0.68], [1,0.69], [1,0.17], [1,0.4], [0,0.53]], 1, 2
 # gain_ratio_numeric(data_set,attr,step) == (0.31918053332474033, 0.64)
