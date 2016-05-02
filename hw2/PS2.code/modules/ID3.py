@@ -143,20 +143,20 @@ def gain_ratio_nominal(data_set, attribute):
     Output: Returns gain_ratio. See https://en.wikipedia.org/wiki/Information_gain_ratio
     ========================================================================================================
     '''
-    splitnom = split_on_nominal(data_set, attribute)
-    numEntries = len(data_set)
-    dataEntropy = entropy(data_set)
-    IntrVal = 0
-    subsetEntropy = 0
-    for splitval in splitnom.keys():
-        prob = float(len(splitnom[splitval])) / numEntries
-        IntrVal += -prob * math.log(prob, 2)
-        subsetEntropy += entropy(splitnom[splitval]) * prob
-    InfoGain = dataEntropy - subsetEntropy
+    pivot = split_on_nominal(data_set, attribute)
+    Ex = len(data_set)
+    ent = entropy(data_set)
+    IV = 0
+    subEnt = 0
+    for x in pivot.keys():
+        prob = float(len(pivot[x])) / Ex
+        IV += -prob * math.log(prob, 2)
+        subEnt += entropy(pivot[x]) * prob
+    InfoGain = ent - subEnt
     if InfoGain == 0:
         return 0
     else:
-        return InfoGain / IntrVal
+        return InfoGain / IV
 # ======== Test case =============================
 # data_set, attr = [[1, 2], [1, 0], [1, 0], [0, 2], [0, 2], [0, 0], [1, 3], [0, 4], [0, 3], [1, 1]], 1
 # gain_ratio_nominal(data_set,attr) == 0.11470666361703151
