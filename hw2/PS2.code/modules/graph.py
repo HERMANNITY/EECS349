@@ -6,6 +6,10 @@ import matplotlib.pyplot as plt
 import os.path
 from pruning import validation_accuracy
 
+# NOTE: these functions are just for your reference, you will NOT be graded on their output
+# so you can feel free to implement them as you choose, or not implement them at all if you want
+# to use an entirely different method for graphing
+
 def get_graph_accuracy_partial(train_set, attribute_metadata, validate_set, numerical_splits_count, pct):
     '''
     get_graph_accuracy_partial - Given a training set, attribute metadata, validation set, numerical splits count, and percentage,
