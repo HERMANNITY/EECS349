@@ -94,7 +94,7 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
             memeda[gratio] = i
             i += 1
         elif entry['is_nominal'] == False and numerical_splits_count[i] > 0:
-            gratio = gain_ratio_numeric(data_set, i, 1)
+            gratio = gain_ratio_numeric(data_set, i)
             memeda[gratio[0]] = i
             numerical_splits_count[i] -= 1
             i += 1
@@ -105,7 +105,7 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
         if attribute_metadata[ans]['is_nominal']:
             return (ans, False)
         else:
-            return (ans, gain_ratio_numeric(data_set, ans, 1)[1])
+            return (ans, gain_ratio_numeric(data_set, ans)[1])
 
 # # ======== Test Cases =============================
 # numerical_splits_count = [20,20]
@@ -145,6 +145,21 @@ def mode(data_set):
 # data_set = [[0],[1],[0],[0]]
 # mode(data_set) == 0
 
+def findMode(data_set, attribute):
+    pool = {}
+    for x in data_set:
+        if x[attribute] in pool:
+            pool[x[attribute]] += 1
+        else:
+            pool[x[attribute]] = 1
+    maximum = 0
+    maximizer = 0
+    for x in pool.keys():
+        if pool[x] > maximum:
+            maximum = pool[x]
+            maximizer = x
+    return maximizer
+
 def entropy(data_set):
     '''
     ========================================================================================================
@@ -158,11 +173,17 @@ def entropy(data_set):
     num = len(data_set)
     count0 = 0
     count1 = 0
+    maj = mode(data_set)
     for x in xrange(0, len(data_set)):
-        if data_set[x][0]:
+        if data_set[x][0] == 1:
             count1 += 1
-        else:
+        elif data_set[x][0] == 0:
             count0 += 1
+        else:
+            if maj:
+                count1 += 1
+            else:
+                count0 += 1
     p0 = float(count0) / num
     p1 = float(count1) / num
     if p0 == 0 or p1 == 0:
@@ -210,7 +231,7 @@ def gain_ratio_nominal(data_set, attribute):
 # data_set, attr = [[0, 3], [0, 3], [0, 3], [0, 4], [0, 4], [0, 4], [0, 0], [0, 2], [1, 4], [0, 4]], 1
 # gain_ratio_nominal(data_set,attr) == 0.06409559743967516
 
-def gain_ratio_numeric(data_set, attribute, steps):
+def gain_ratio_numeric(data_set, attribute, steps = 1):
     '''
     ========================================================================================================
     Input:  Subset of data set, the index for a numeric attribute, and a step size for normalizing the data.
