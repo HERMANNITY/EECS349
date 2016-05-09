@@ -10,18 +10,18 @@ from modules.parse import *
 # want to use a different
 # architecture for pruning.
 
-def reduced_error_pruning(temproot, temp_originroot, root, originroot, 
+def reduced_error_pruning(temp_root, temp_originroot, root, originroot, 
     training_set, validation_set, attribute_metadata):
-    if temproot.is_nominal == True:
-        subset = split_on_nominal(training_set, temproot.decision_attribute)
+    if temp_root.is_nominal == True:
+        subset = split_on_nominal(training_set, temp_root.decision_attribute)
 
-        for div in temproot.children.keys():
-            if temproot.children[div].label == None:
+        for div in temp_root.children.keys():
+            if temp_root.children[div].label == None:
                 new_Node = Node()
                 new_Node.label = mode(subset[div])
                 new_Node.children = {}
-                temp = copy.deepcopy(temproot.children[div])
-                temproot.children[div] = new_Node
+                temp = copy.deepcopy(temp_root.children[div])
+                temp_root.children[div] = new_Node
                 prune_acc = validation_accuracy(temp_originroot, validation_set,
                  attribute_metadata)
                 acc = validation_accuracy(originroot, validation_set,
@@ -30,20 +30,20 @@ def reduced_error_pruning(temproot, temp_originroot, root, originroot,
                     print prune_acc
                     root.children[div] = new_Node
                 else:
-                    temproot.children[div] = temp
-                    reduced_error_pruning(temproot.children[div],
+                    temp_root.children[div] = temp
+                    reduced_error_pruning(temp_root.children[div],
                      temp_originroot, root.children[div], originroot,
-                      subset[div], validation_set, attribute_metadata)
-    if temproot.is_nominal == False:
+                     subset[div], validation_set, attribute_metadata)
+    if temp_root.is_nominal == False:
         subset = split_on_numerical(training_set, root.decision_attribute,
          root.splitting_value)
-        for i in range(0, 2):
-            if temproot.children[i].label == None:
+        for i in xrange(0, 2):
+            if temp_root.children[i].label == None:
                 new_Node = Node()
                 new_Node.label = mode(subset[i])
                 new_Node.children = {}
-                temp = copy.deepcopy(temproot.children[i])
-                temproot.children[i] = new_Node
+                temp = copy.deepcopy(temp_root.children[i])
+                temp_root.children[i] = new_Node
                 prune_acc = validation_accuracy(temp_originroot, validation_set,
                  attribute_metadata)
                 acc = validation_accuracy(originroot, validation_set,
@@ -52,8 +52,8 @@ def reduced_error_pruning(temproot, temp_originroot, root, originroot,
                     print prune_acc
                     root.children[i] = new_Node
                 else:
-                    temproot.children[i] = temp
-                    reduced_error_pruning(temproot.children[i], temp_originroot,
+                    temp_root.children[i] = temp
+                    reduced_error_pruning(temp_root.children[i], temp_originroot,
                      root.children[i], originroot, subset[i], validation_set, 
                      attribute_metadata) 
        
