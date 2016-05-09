@@ -94,7 +94,7 @@ def parse(filename, keep_unlabeled):
         d.rotate(1)
         array.append(list(d))
 
-    array.pop()
+    # array.pop()
 
     # rotate attributes so that it corresponds to the data
     attributes = collections.deque(attributes)

@@ -2,6 +2,7 @@ import math
 from node import Node
 import sys
 import copy
+from data_preprocessing import *
 
 def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     '''
@@ -16,14 +17,16 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
     ========================================================================================================
 
     '''
+    preprocessing(data_set, attribute_metadata)
     if check_homogenous(data_set) != None:
         ans = Node()
         ans.label = check_homogenous(data_set)
     elif depth == 0:
-        ans = Node()
-        ans.label = mode(data_set)
+            ans = Node()
+            ans.label = mode(data_set)
     else:
-        best = pick_best_attribute(data_set, attribute_metadata, numerical_splits_count)
+        best = pick_best_attribute(data_set, attribute_metadata, 
+            numerical_splits_count)
         if best[0] == False:
             ans = Node()
             ans.label = mode(data_set)
@@ -32,19 +35,22 @@ def ID3(data_set, attribute_metadata, numerical_splits_count, depth):
             ans.decision_attribute = best[0]
             ans.name = attribute_metadata[best[0]]['name']
             depth -= 1
-            if best[1] == False:
+            if str(best[1]) == 'False':
                 ans.is_nominal = True
                 ans.children = {}
-                div = split_on_nominal(data_set, best[0])
-                for x in div.keys():
-                    ans.children[x] = ID3(div[x], attribute_metadata, numerical_splits_count, depth)
+                divide = split_on_nominal(data_set, best[0])
+                for x in divide.keys():
+                    ans.children[x] = ID3(divide[x], attribute_metadata, 
+                        numerical_splits_count, depth)
             else:
                 ans.is_nominal = False
                 ans.children = []
                 ans.splitting_value = best[1]
-                div = split_on_numerical(data_set, best[0], best[1])
-                ans.children.append(ID3(div[0], attribute_metadata, numerical_splits_count, depth))
-                ans.children.append(ID3(div[1], attribute_metadata, numerical_splits_count, depth)) 
+                divide = split_on_numerical(data_set, best[0], best[1])
+                ans.children.append(ID3(divide[0], attribute_metadata, 
+                    numerical_splits_count, depth))
+                ans.children.append(ID3(divide[1], attribute_metadata, 
+                    numerical_splits_count, depth)) 
     return ans
 
 def check_homogenous(data_set):
@@ -52,17 +58,15 @@ def check_homogenous(data_set):
     ========================================================================================================
     Input:  A data_set
     ========================================================================================================
-    Job:    Checks if the output value (index 0) is the same for all examples in the the data_set, if so return that output value, otherwise return None.
+    Job:    Checks if the attribute at index 0 is the same for the data_set, if so return output otherwise None.
     ========================================================================================================
     Output: Return either the homogenous attribute or None
     ========================================================================================================
-     '''
-    # Your code here
-    check = data_set[0][0]
-    for x in xrange(1,len(data_set)):
-        if check != data_set[x][0]:
+    '''
+    for i in xrange(0, len(data_set) - 1):
+        if data_set[i][0] != data_set[i + 1][0]:
             return None
-    return check
+    return data_set[0][0]
 # ======== Test Cases =============================
 # data_set = [[0],[1],[1],[1],[1],[1]]
 # check_homogenous(data_set) ==  None
@@ -85,27 +89,36 @@ def pick_best_attribute(data_set, attribute_metadata, numerical_splits_count):
     ========================================================================================================
     '''
     i = 0
+    max_num = 0
     memeda = {}
-    for entry in attribute_metadata:
-        if entry['name'] == "winner":
+    for x in attribute_metadata:
+        if x['name'] == "winner":
             i += 1
-        elif entry['is_nominal'] == True:
+            continue
+        if x['is_nominal'] == True:
             gratio = gain_ratio_nominal(data_set, i)
             memeda[gratio] = i
             i += 1
-        elif entry['is_nominal'] == False and numerical_splits_count[i] > 0:
-            gratio = gain_ratio_numeric(data_set, i)
-            memeda[gratio[0]] = i
-            numerical_splits_count[i] -= 1
-            i += 1
+        if x['is_nominal'] == False:
+            if numerical_splits_count[i] != 0:
+                gratio = gain_ratio_numeric(data_set, i, 50)
+                if gratio[0] >= max_num:
+                    max_num = gratio[0]
+                    splival_atmax = gratio[1]
+                memeda[gratio[0]] = i
+                i += 1
+            else:
+                memeda[0] = i
+                i += 1
     if memeda == {} or max(memeda.keys()) == 0:
         return (False, False)
     else: 
         ans = memeda[max(memeda.keys())]
-        if attribute_metadata[ans]['is_nominal']:
+        if attribute_metadata[ans]['is_nominal'] == True:
             return (ans, False)
         else:
-            return (ans, gain_ratio_numeric(data_set, ans)[1])
+            numerical_splits_count[ans] -= 1
+            return (ans, splival_atmax)
 
 # # ======== Test Cases =============================
 # numerical_splits_count = [20,20]
@@ -130,11 +143,11 @@ def mode(data_set):
     '''
     count0 = 0
     count1 = 0
-    for x in xrange(0, len(data_set)):
-        if data_set[x][0]:
-            count1 += 1
-        else:
+    for x in data_set:
+        if x[0] == 0:
             count0 += 1
+        else:
+            count1 += 1
     if count0 > count1:
         return 0
     else:
@@ -144,21 +157,6 @@ def mode(data_set):
 # mode(data_set) == 1
 # data_set = [[0],[1],[0],[0]]
 # mode(data_set) == 0
-
-def findMode(data_set, attribute):
-    pool = {}
-    for x in data_set:
-        if x[attribute] in pool:
-            pool[x[attribute]] += 1
-        else:
-            pool[x[attribute]] = 1
-    maximum = 0
-    maximizer = 0
-    for x in pool.keys():
-        if pool[x] > maximum:
-            maximum = pool[x]
-            maximizer = x
-    return maximizer
 
 def entropy(data_set):
     '''
@@ -170,28 +168,21 @@ def entropy(data_set):
     Output: Returns entropy. See Textbook for formula
     ========================================================================================================
     '''
-    num = len(data_set)
+    numEntries = len(data_set)
     count0 = 0
     count1 = 0
-    maj = mode(data_set)
-    for x in xrange(0, len(data_set)):
-        if data_set[x][0] == 1:
-            count1 += 1
-        elif data_set[x][0] == 0:
+    for x in data_set:
+        if x[0] == 0:
             count0 += 1
         else:
-            if maj:
-                count1 += 1
-            else:
-                count0 += 1
-    p0 = float(count0) / num
-    p1 = float(count1) / num
+            count1 += 1
+    p0 = float(count0)/numEntries
+    p1 = float(count1)/numEntries
     if p0 == 0 or p1 == 0:
         ans = 0
     else:
-        ans = -(p0 * math.log(p0, 2) + p1 * math.log(p1, 2))
+        ans = -p0 * math.log(p0, 2) - p1 * math.log(p1, 2)
     return ans
-
 
 # ======== Test case =============================
 # data_set = [[0],[1],[1],[1],[0],[1],[1],[1]]
@@ -217,18 +208,21 @@ def gain_ratio_nominal(data_set, attribute):
     ent = entropy(data_set)
     IV = 0
     subEnt = 0
-    for x in split.keys():
-        prob = float(len(split[x])) / Ex
-        IV += -prob * math.log(prob, 2)
-        subEnt += entropy(split[x]) * prob
-    IG = ent - subEnt
-    return IG / IV
+    for splitval in split.keys():
+        p = float(len(split[splitval])) / Ex
+        IV += -p * math.log(p, 2)
+        subEnt += entropy(split[splitval]) * p
+    InfoGain = ent - subEnt
+    if InfoGain == 0:
+        return 0
+    else:
+        return InfoGain / IV
 # ======== Test case =============================
 # data_set, attr = [[1, 2], [1, 0], [1, 0], [0, 2], [0, 2], [0, 0], [1, 3], [0, 4], [0, 3], [1, 1]], 1
 # gain_ratio_nominal(data_set,attr) == 0.11470666361703151
 # data_set, attr = [[1, 2], [1, 2], [0, 4], [0, 0], [0, 1], [0, 3], [0, 0], [0, 0], [0, 4], [0, 2]], 1
 # gain_ratio_nominal(data_set,attr) == 0.2056423328155741
-# data_set, attr = [[0, 3], [0, 3], [0, 3], [0, 4], [0, 4], [0, 4], [0, 0], [0, 2], [1, 4], [0, 4]], 1
+# data_set, attr = [[0, 3], [0, 3], [0, 3 ], [0, 4], [0, 4], [0, 4], [0, 0], [0, 2], [1, 4], [0, 4]], 1
 # gain_ratio_nominal(data_set,attr) == 0.06409559743967516
 
 def gain_ratio_numeric(data_set, attribute, steps = 1):
@@ -247,21 +241,22 @@ def gain_ratio_numeric(data_set, attribute, steps = 1):
     ========================================================================================================
     '''
     result = {}
-    for x in xrange(0, len(data_set)):
-        if x % steps == 0:
-            splitnum = split_on_numerical(data_set, attribute, data_set[x][attribute])
+    for index in xrange(0, len(data_set)):
+        if index % steps == 0:
+            splitnum = split_on_numerical(data_set, attribute, 
+                data_set[index][attribute])
             if splitnum[0] == [] or splitnum[1] == []:
                 infoRatio = 0
             else:
-                left = copy.deepcopy(splitnum[0])
-                right = copy.deepcopy(splitnum[1])
-                for y in left:
-                    y[attribute] = 0
-                for y in right:
-                    y[attribute] = 1
-                new_data_set = left + right
+                templeft = copy.deepcopy(splitnum[0])
+                tempright = copy.deepcopy(splitnum[1])
+                for x in templeft:
+                    x[attribute] = 0
+                for x in tempright:
+                    x[attribute] = 1
+                new_data_set = templeft + tempright
                 infoRatio = gain_ratio_nominal(new_data_set, attribute)
-            result[infoRatio] = data_set[x][attribute]
+            result[infoRatio] = data_set[index][attribute]         #may have bug
     return (max(result.keys()), result[max(result.keys())])
 # ======== Test case =============================
 # data_set,attr,step = [[0,0.05], [1,0.17], [1,0.64], [0,0.38], [0,0.19], [1,0.68], [1,0.69], [1,0.17], [1,0.4], [0,0.53]], 1, 2
@@ -313,16 +308,8 @@ def split_on_numerical(data_set, attribute, splitting_value):
         else:
             greater.append(x)
     return (less, greater)
-
 # ======== Test case =============================
 # d_set,a,sval = [[1, 0.25], [1, 0.89], [0, 0.93], [0, 0.48], [1, 0.19], [1, 0.49], [0, 0.6], [0, 0.6], [1, 0.34], [1, 0.19]],1,0.48
 # split_on_numerical(d_set,a,sval) == ([[1, 0.25], [1, 0.19], [1, 0.34], [1, 0.19]],[[1, 0.89], [0, 0.93], [0, 0.48], [1, 0.49], [0, 0.6], [0, 0.6]])
 # d_set,a,sval = [[0, 0.91], [0, 0.84], [1, 0.82], [1, 0.07], [0, 0.82],[0, 0.59], [0, 0.87], [0, 0.17], [1, 0.05], [1, 0.76]],1,0.17
 # split_on_numerical(d_set,a,sval) == ([[1, 0.07], [1, 0.05]],[[0, 0.91],[0, 0.84], [1, 0.82], [0, 0.82], [0, 0.59], [0, 0.87], [0, 0.17], [1, 0.76]])
-
-
-
-
-
-
-

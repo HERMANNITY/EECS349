@@ -3,6 +3,7 @@ from modules.parse import *
 from modules.pruning import *
 from modules.graph import *
 from modules.predictions import *
+import copy
 
 # DOCUMENATION
 # ===========================================
@@ -11,21 +12,22 @@ from modules.predictions import *
 #   options can be found in README.md
 
 options = {
-    'train' : 'data/btrain.csv',
-    'validate': 'data/bvalidate.csv',
-    'predict': 'data/btest.csv',
+    'train' : 'data/test_btrain.csv',
+    'validate': 'data/test_bvalidate.csv',
+    'predict': 'data/test_btest.csv',
+    'new': 'data/new.csv',
     'limit_splits_on_numerical': 5,
-    'limit_depth': 20,
-    'print_tree': True,
-    'print_dnf' : False,
-    'prune' : 'data/bvalidate.csv',
-    'learning_curve' : {
-        'upper_bound' : 0.05,
-        'increment' : 0.001
-    }
+    'limit_depth': 5,
+    # 'print_tree': True,
+    # 'print_dnf' : True,
+    'prune' : 'data/test_bvalidate.csv',
+    # 'learning_curve' : {
+    #     'upper_bound' : 0.5,
+    #     'increment' : 0.05
+    # }
 }
 
-def decision_tree_driver(train, validate = False, predict = False, prune = False,
+def decision_tree_driver(train, validate = False, predict = False, new = False, prune = False,
     limit_splits_on_numerical = False, limit_depth = False, print_tree = False,
     print_dnf = False, learning_curve = False):
     
@@ -40,17 +42,23 @@ def decision_tree_driver(train, validate = False, predict = False, prune = False
     else:
         depth = float("inf")
 
+    origin_splits_count = copy.deepcopy(numerical_splits_count)
+    
     print "###\n#  Training Tree\n###"
 
     # call the ID3 classification algorithm with the appropriate options
     tree = ID3(train_set, attribute_metadata, numerical_splits_count, depth)
+    print 'finish'
     print '\n'
 
     # call reduced error pruning using the pruning set
     if prune != False:
         print '###\n#  Pruning\n###'
         pruning_set, _ = parse(prune, False)
-        reduced_error_pruning(tree,train_set,pruning_set)
+        temptree = copy.deepcopy(tree)
+        temp_origintree = temptree
+        origintree = tree
+        reduced_error_pruning(temptree, temp_origintree, tree, origintree, train_set, pruning_set, attribute_metadata)
         print ''
 
     # print tree visually
@@ -75,23 +83,28 @@ def decision_tree_driver(train, validate = False, predict = False, prune = False
     if validate != False:
         print '###\n#  Validating\n###'
         validate_set, _ = parse(validate, False)
-        accuracy = validation_accuracy(tree,validate_set)
+        accuracy = validation_accuracy(tree,validate_set, attribute_metadata)  #add attribute_metadata
         print "Accuracy on validation set: " + str(accuracy)
         print ''
 
     # generate predictions on the test set
     if predict != False:
         print '###\n#  Generating Predictions on Test Set\n###'
-        create_predictions(tree, predict)
+        create_predictions(tree, predict, new)  #add new
         print ''
 
     # generate a learning curve using the validation set
     if learning_curve and validate:
         print '###\n#  Generating Learning Curve\n###'
-        iterations = 20 # number of times to test each size
+        iterations = 3 # number of times to test each size
         get_graph(train_set, attribute_metadata, validate_set, 
-            numerical_splits_count, depth, 5, 0, learning_curve['upper_bound'],
+            origin_splits_count, depth, 3, 0, learning_curve['upper_bound'],
             learning_curve['increment'])
         print ''
 
 tree = decision_tree_driver( **options )
+
+
+print "new500_5_5_unpruned"
+
+
