@@ -18,9 +18,9 @@ options = {
     'new': 'data/new.csv',
     'limit_splits_on_numerical': 5,
     'limit_depth': 5,
-    # 'print_tree': True,
-    # 'print_dnf' : True,
-    'prune' : 'data/test_bvalidate.csv',
+    'print_tree': True,
+    'print_dnf' : True,
+    # 'prune' : 'data/test_bvalidate.csv',
     # 'learning_curve' : {
     #     'upper_bound' : 0.5,
     #     'increment' : 0.05

@@ -1,38 +1,45 @@
 numinjured < 1.0
   oppnuminjured < 1.0
-    numinjured < 0.0
+    opprundifferential < 32.0 : 1
+    opprundifferential >= 32.0
       oppnuminjured < 0.0 : 1
-      oppnuminjured >= 0.0 : 0
-    numinjured >= 0.0
-      winpercent < 0.532362542753
-        oppwinningpercent < 0.404436407752
-          winpercent < 0.515102577345 : 1
-          winpercent >= 0.515102577345
-            oppnuminjured < 0.0 : 0
-            oppnuminjured >= 0.0
-              rundifferential < 40.0 : 0
-              rundifferential >= 40.0 : 1
-        oppwinningpercent >= 0.404436407752 : 1
-      winpercent >= 0.532362542753
-        opprundifferential < 32.0
-          oppwinningpercent < 0.366154143511
-            numinjured < 0.94164056155
-              oppstartingpitcher = 1 : 0
-              oppstartingpitcher = 2 : 1
-              oppstartingpitcher = 4 : 1
-              oppstartingpitcher = 5 : 1
-            numinjured >= 0.94164056155 : 0
-          oppwinningpercent >= 0.366154143511 : 1
-        opprundifferential >= 32.0
-          oppwinningpercent < 0.88288667436
-            numinjured < 0.94164056155 : 1
-            numinjured >= 0.94164056155 : 0
-          oppwinningpercent >= 0.88288667436 : 1
+      oppnuminjured >= 0.0
+        dayssincegame < 2.0 : 0
+        dayssincegame >= 2.0 : 1
   oppnuminjured >= 1.0
-    opprundifferential < 24.0
-      rundifferential < 29.0 : 0
-      rundifferential >= 29.0 : 1
-    opprundifferential >= 24.0 : 0
+    opprundifferential < 43.0
+      rundifferential < 71.0
+        opprundifferential < 28.0 : 0
+        opprundifferential >= 28.0 : 0
+      rundifferential >= 71.0 : 1
+    opprundifferential >= 43.0 : 0
 numinjured >= 1.0
-  oppnuminjured < 2.07108370659 : 1
-  oppnuminjured >= 2.07108370659 : 0
+  oppnuminjured < 2.0
+    oppwinningpercent < 0.354916694
+      oppwinningpercent < 0.261062525
+        winpercent < 0.661899761 : 1
+        winpercent >= 0.661899761 : 0
+      oppwinningpercent >= 0.261062525
+        startingpitcher = 1 : 1
+        startingpitcher = 2 : 1
+        startingpitcher = 3 : 1
+        startingpitcher = 4 : 1
+        startingpitcher = 5 : 1
+    oppwinningpercent >= 0.354916694
+      winpercent < 0.777399225
+        winpercent < 0.219309677 : 1
+        winpercent >= 0.219309677 : 1
+      winpercent >= 0.777399225
+        oppwinningpercent < 0.375600184 : 0
+        oppwinningpercent >= 0.375600184 : 1
+  oppnuminjured >= 2.0
+    numinjured < 2.0
+      opprundifferential < 13.0 : 1
+      opprundifferential >= 13.0
+        opprundifferential < 32.0 : 1
+        opprundifferential >= 32.0 : 0
+    numinjured >= 2.0
+      oppwinningpercent < 0.15431423 : 0
+      oppwinningpercent >= 0.15431423
+        oppwinningpercent < 0.482567275 : 1
+        oppwinningpercent >= 0.482567275 : 1
