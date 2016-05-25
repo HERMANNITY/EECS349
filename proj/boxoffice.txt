@@ -1,0 +1,123 @@
+Processing 0
+Pulp Fiction(film): $213.9 million
+Processing 1
+The Amazing Spider-Man 2(film): $709 million
+Processing 2
+The Shawshank Redemption(film): $58 million
+Processing 3
+Star Wars(film): $775.4 million
+Processing 4
+Back to the Future(film): $389.1 million
+Processing 5
+The Breakfast Club(film): $51.5 million
+Processing 6
+The Goonies(film): $61.5 million
+Processing 7
+The Silence of the Lambs(film): $272.7 million
+Processing 8
+Jurassic Park(film): $1.029 billion
+Processing 9
+The Lion King(film): $987.5 million
+Processing 10
+Se7en(film): $327.3 million
+Processing 11
+Toy Story: $362 million
+Processing 12
+The Big Lebowski: $46.1 million
+Processing 13
+Saving Private Ryan(film): $481.8 million
+Processing 14
+Fight Club(film): $100.9 million
+Processing 15
+The Matrix(film): $1.632 billion
+Processing 16
+Star Wars: Episode I - The Phantom Menace: $1.027 billion
+Processing 17
+Gladiator (2000 film): $457.6 million
+Processing 18
+X-Men(film): $3.815 billion 
+Processing 19
+Harry Potter and the Sorcerer's Stone(film): $974.8 million
+Processing 20
+The Lord of the Rings: The Fellowship of the Ring(film): $871.5&#160;million
+Processing 21
+The Lord of the Rings: The Two Towers(film): $926 million
+Processing 22
+XXX (2002 film): $277.4 million
+Processing 23
+Finding Nemo(film): $936.7 million
+Processing 24
+The Lord of the Rings: The Return of the King(film): $2.917 billion
+Processing 25
+Anchorman: The Legend of Ron Burgundy: $90.6 million
+Processing 26
+Mean Girls(film): $129 million
+Processing 27
+Sin City(film): $158.8 million
+Processing 28
+Star Wars: Episode III - Revenge of the Sith: $848.8 million
+Processing 29
+Batman Begins(film): $374.2 million
+Processing 30
+The Departed(film): $289.8 million
+Processing 31
+The Prestige(film): $109.7 million
+Processing 32
+V for Vendetta(film): $132.5 million
+Processing 33
+Casino Royale (2006 film): $599 million
+Processing 34
+Transformers(film): itle="Transformers (film series)">
+Processing 35
+The Dark Knight(film): $1.005 billion
+Processing 36
+Iron Man (2008 film): $585.2 million
+Processing 37
+Quantum of Solace(film): $586.1 million
+Processing 38
+Tropic Thunder(film): $188.1 million
+Processing 39
+G.I. Joe: The Rise of Cobra(film): $302.5 million
+Processing 40
+The Hangover(film): $467.5&#160;million
+Processing 41
+Inglourious Basterds: $321.5 million
+Processing 42
+Star Trek(film): $385.7 million
+Processing 43
+Taken(film): $226.8 million
+Processing 44
+Up (2009 film): $731.4 million
+Processing 45
+X-Men Origins: Wolverine(film): $373.1 million
+Processing 46
+Zombieland: $102.4 million
+Processing 47
+2012(film): > 
+Processing 48
+Avatar(film) has error
+Processing 48
+Despicable Me(film): $543.2 million
+Processing 49
+Grown Ups(film): $271.4 million
+Processing 50
+How to Train Your Dragon(film): $494.9 million
+Processing 51
+Inception(film): $825.5 million
+Processing 52
+Iron Man 2(film): gn:center;font-size:125%;font-weight:bold;background: #99c2ff;">
+Processing 53
+Kick-Ass(film): $96.2 million
+Processing 54
+RED(film): 
+Processing 55
+Shutter Island(film): $294.8 million
+Processing 56
+TRON: Legacy(film): $400.1 million
+Processing 57
+Toy Story 3(film): $1.063 billion
+Processing 58
+Drive(film): $20.1 million
+Processing 59
+Fast Five(film): $626.1 million
+Processing 60
