@@ -1,108 +1,100 @@
-213.9,8,Pulp Fiction
-709,200,The Amazing Spider-Man 2
-58,25,The Shawshank Redemption
-775.4,11,Star Wars
-389.1,19,Back to the Future
-51.5,1,The Breakfast Club
-61.5,19,The Goonies
-272.7,19,The Silence of the Lambs
-1029,63,Jurassic Park
-987.5,45,The Lion King
-327.3,33,Se7en
-362,30,Toy Story
-46.1,15,The Big Lebowski
-481.8,70,Saving Private Ryan
-100.9,63,Fight Club
-1632,363,The Matrix
-1027,115,Star Wars: Episode I - The Phantom Menace
-457.6,103,Gladiator
-,,X-Men
-974.8,125,Harry Potter and the Sorcerer's Stone
-,,The Lord of the Rings: The Fellowship of the Ring
-926,94,The Lord of the Rings: The Two Towers
-277.4,70,xXx
-936.7,94,Finding Nemo
-2917,281,The Lord of the Rings: The Return of the King
-90.6,26,Anchorman: The Legend of Ron Burgundy
-129,,Mean Girls
-158.8,40,Sin City
-848.8,113,Star Wars: Episode III - Revenge of the Sith
-374.2,150,Batman Begins
-289.8,90,The Departed
-109.7,40,The Prestige
-132.5,54,V for Vendetta
-599,,Casino Royale
-,,Transformers
-1005,185,The Dark Knight
-585.2,140,Iron Man
-586.1,200,Quantum of Solace
-188.1,92,Tropic Thunder
-302.5,175,G.I. Joe: The Rise of Cobra
-,,The Hangover
-321.5,70,Inglourious Basterds
-385.7,150,Star Trek
-226.8,22,Taken
-731.4,175,Up
-373.1,,X-Men Origins: Wolverine
-102.4,,Zombieland
-,,2012
-,,Avatar
-543.2,69,Despicable Me
-271.4,80,Grown Ups
-494.9,,How to Train Your Dragon
-825.5,160,Inception
-,,Iron Man 2
-96.2,28,Kick-Ass
-,,RED
-294.8,80,Shutter Island
-400.1,170,TRON: Legacy
-1063,,Toy Story 3
-20.1,15,Drive
-626.1,125,Fast Five
-,,Harry Potter and the Deathly Hallows: Part 2
-161.8,27,Limitless
-,,Pirates of the Caribbean: On Stranger Tides
-353.6,,X-Men: First Class
-,,The Girl with the Dragon Tattoo
-216.6,25,The Help
-173.9,40,In Time
-201.6,42,21 Jump Street
-,,The Amazing Spider-Man
-235,50,American Reunion
-1520,,The Avengers
-303,220,Battleship
-276.1,125,The Bourne Legacy
-,,Brave
-,,The Cabin in the Woods
-104.9,95,The Campaign
-130.5,128.5,Cloud Atlas
-1085,230,The Dark Knight Rises
-245.5,150,Dark Shadows
-425.4,100,Django Unchained
-113.5,90,Dredd
-,,End of Watch
-305.4,100,The Expendables 2
-,,Flight
-41.9,,The Guilt Trip
-,3.9,Here Comes the Boom
-1021,200,The Hobbit: An Unexpected Journey
-358.4,85,Hotel Transylvania
-218.3,60,Jack Reacher
-284.1,263.7,John Carter
-,,Killing Them Softly
-,26,Lawless
-609,120,Life of Pi
-176.5,30,Looper
-,,Magic Mike
-,,Man on a Ledge
-20.3,20,The Man with the Iron Fists
-,,The Master
-,,Men in Black 3
-,25,Parental Guidance
-,,Project X
-,,Prometheus
-,4.2,Red Dawn
-306.9,145,Rise of the Guardians
-,,Savages
-33,13.5,Seven Psychopaths
-77.7,3,Sinister
+0,Pulp Fiction,213.9,8.0
+1,The Amazing Spider-Man 2,709.0,200.0
+2,The Shawshank Redemption,58.0,25.0
+3,Star Wars,775.4,11.0
+4,Back to the Future,389.1,19.0
+5,The Breakfast Club,51.5,1.0
+6,The Goonies,61.5,19.0
+7,The Silence of the Lambs,272.7,19.0
+8,Jurassic Park,1029.0,63.0
+9,The Lion King,968.5,45.0
+10,Se7en,327.3,33.0
+11,Toy Story,?,?
+12,The Big Lebowski,?,?
+13,Saving Private Ryan,481.8,70.0
+14,Fight Club,100.9,63.0
+15,The Matrix,463.5,63.0
+16,Star Wars: Episode I - The Phantom Menace,?,?
+17,Gladiator,457.6,103.0
+18,X-Men,296.3,75.0
+19,Harry Potter and the Sorcerer's Stone,974.8,125.0
+20,The Lord of the Rings: The Fellowship of the Ring,871.5,93.0
+21,The Lord of the Rings: The Two Towers,926.0,94.0
+22,xXx,277.4,70.0
+23,Finding Nemo,936.7,94.0
+24,The Lord of the Rings: The Return of the King,1.12,94.0
+25,Anchorman: The Legend of Ron Burgundy,?,?
+26,Mean Girls,129.0,?
+27,Sin City,158.8,40.0
+28,Star Wars: Episode III - Revenge of the Sith,?,?
+29,Batman Begins,374.2,150.0
+30,The Departed,289.8,90.0
+31,The Prestige,109.7,40.0
+32,V for Vendetta,132.5,54.0
+33,Casino Royale,599.0,150.0
+34,Transformers,709.7,150.0
+35,The Dark Knight,1004.9999999999999,185.0
+36,Iron Man,585.2,140.0
+37,Quantum of Solace,586.1,200.0
+38,Tropic Thunder,188.1,92.0
+39,G.I. Joe: The Rise of Cobra,302.5,175.0
+40,The Hangover,467.5,35.0
+41,Inglourious Basterds,321.5,70.0
+42,Star Trek,385.7,150.0
+43,Taken,226.8,22.0
+44,Up,731.4,175.0
+45,X-Men Origins: Wolverine,373.1,150.0
+46,Zombieland,?,?
+47,2012,769.7,200.0
+48,Avatar,2788.0,237.0
+49,Despicable Me,543.1,69.0
+50,Grown Ups,271.4,80.0
+51,How to Train Your Dragon,494.9,165.0
+52,Inception,825.5,160.0
+53,Iron Man 2,623.9,200.0
+54,Kick-Ass,96.2,28.0
+55,RED,199.0,58.0
+56,Shutter Island,294.8,80.0
+57,TRON: Legacy,400.1,170.0
+58,Toy Story 3,1063.0,200.0
+59,Drive,76.2,15.0
+60,Fast Five,626.1,125.0
+61,Harry Potter and the Deathly Hallows: Part 2,1342.0,250.0
+62,Limitless,161.8,27.0
+63,Pirates of the Caribbean: On Stranger Tides,?,?
+64,X-Men: First Class,353.6,140.0
+65,The Girl with the Dragon Tattoo,?,?
+66,The Help,216.6,25.0
+67,In Time,173.9,40.0
+68,21 Jump Street,201.6,42.0
+69,The Amazing Spider-Man,757.9,230.0
+70,American Reunion,235.0,50.0
+71,The Avengers,1520.0,220.0
+72,Battleship,303.0,220.0
+73,The Bourne Legacy,276.1,125.0
+74,Brave,539.0,185.0
+75,The Cabin in the Woods,?,?
+76,The Campaign,104.9,95.0
+77,Cloud Atlas,130.5,128.5
+78,The Dark Knight Rises,1085.0,230.0
+79,Dark Shadows,245.5,150.0
+80,Django Unchained,425.4,100.0
+81,Dredd,41.5,30.0
+82,End of Watch,57.6,7.0
+83,The Expendables 2,305.4,100.0
+84,Flight,?,?
+85,The Guilt Trip,41.9,40.0
+86,Here Comes the Boom,?,?
+87,The Hobbit: An Unexpected Journey,1020.9999999999999,200.0
+88,Hotel Transylvania,358.4,85.0
+89,Jack Reacher,218.3,60.0
+90,John Carter,284.1,263.7
+91,Killing Them Softly,?,?
+92,Lawless,?,26.0
+93,Life of Pi,609.0,120.0
+94,Looper,176.5,30.0
+95,Magic Mike,122.5,14.8
+96,Man on a Ledge,?,?
+97,The Man with the Iron Fists,20.3,20.0
+98,The Master,?,?
+99,Men in Black 3,?,?

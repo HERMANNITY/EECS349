@@ -3,18 +3,23 @@ import csv
 import wikipedia
 
 def toMillion(txt):
-    li = txt.split(' ')
-    if len(li) > 1:
-	    if li[-1] == 'million':
-	        return float(li[0])
-	    elif li[-1] == 'billion':
-	        return float(li[0])*1000
-	#     else:
-	#     	print li[0]
-	#     	print ('neither million or billion')
-	# else:
-	#    	print li[0]
-	# 	print ('neither million or billion')
+	li = txt.split(' ')
+	if len(li) > 1:
+		if li[-1] == 'million' or li[-1] == "illion":
+			return float(li[0])
+		elif li[-1] == 'billion':
+			return float(li[0])*1000
+		else:
+			return '?'
+			# print li[0]
+			# print ('neither million or billion')
+	else:
+		if float(li[0]):
+			return float(li[0])/1000000
+		else:
+			return '?'
+	 #   	print li[0]
+		# print ('neither million or billion')
 
 movy = open('filtered.csv', 'rb')
 mvLst = []
@@ -28,22 +33,22 @@ for row in movies:
 for x in array:
 	mvLst.append(x[1] + '(film)')
 count = 0
-mvLst[11] = 'Toy Story'
-mvLst[12] = 'The Big Lebowski'
-mvLst[16] = 'Star Wars: Episode I - The Phantom Menace'
-mvLst[17] = 'Gladiator (2000 film)'
-mvLst[22] = 'XXX (2002 film)'
-mvLst[25] = 'Anchorman: The Legend of Ron Burgundy'
-mvLst[28] = 'Star Wars: Episode III - Revenge of the Sith'
-mvLst[33] = 'Casino Royale (2006 film)'
-mvLst[36] = 'Iron Man (2008 film)'
-mvLst[41] = 'Inglourious Basterds'
-mvLst[46] = 'Zombieland'
-mvLst[44] = 'Up (2009 film)'
-mvLst[44] = 'Up (2009 film)'
-mvLst[67] = 'In Time'
+# mvLst[11] = 'Toy Story'
+# mvLst[12] = 'The Big Lebowski'
+# mvLst[16] = 'Star Wars: Episode I - The Phantom Menace'
+# mvLst[17] = 'Gladiator (2000 film)'
+# mvLst[22] = 'XXX (2002 film)'
+# mvLst[25] = 'Anchorman: The Legend of Ron Burgundy'
+# mvLst[28] = 'Star Wars: Episode III - Revenge of the Sith'
+# mvLst[33] = 'Casino Royale (2006 film)'
+# mvLst[36] = 'Iron Man (2008 film)'
+# mvLst[41] = 'Inglourious Basterds'
+# mvLst[46] = 'Zombieland'
+# mvLst[44] = 'Up (2009 film)'
+# mvLst[44] = 'Up (2009 film)'
+# mvLst[67] = 'In Time'
 
-
+errMv = []
 
 for mv in mvLst:
 	if count > 100:
@@ -55,6 +60,7 @@ for mv in mvLst:
 		count += 1
 	except:
 		print mv + " has error"
+		errMv.append(count)
 		output_writer.writerow([''])
 	else:
 		text = av.html()
@@ -86,9 +92,9 @@ for mv in mvLst:
 				budget += text[x]
 			x += 1
 		print mv + ': ' + budget
-
+		
 		output_writer.writerow([toMillion(box), toMillion(budget)])
-
+print errMv
 # output_writer.close()
 
 
